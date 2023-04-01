@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
 	"github.com/ehabterra/rewards/internal/api"
 	"github.com/ehabterra/rewards/internal/models"
@@ -36,13 +37,22 @@ func main() {
 
 	log.Println("server listening..")
 
-	//dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-	dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True",
+	dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		cfg.DB.Username, cfg.DB.Password, cfg.DB.Host, cfg.DB.Port, cfg.DB.DB)
 
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatalf("failed to connect database: %v", err)
+		for tries := 0; tries < 5; tries++ {
+			time.Sleep(time.Second)
+
+			db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+			if err == nil {
+				break
+			}
+		}
+		if err != nil {
+			log.Fatalf("failed to connect database: %v", err)
+		}
 	}
 
 	// Migrate the schema
