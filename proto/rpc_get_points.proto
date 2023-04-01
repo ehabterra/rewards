@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+message GetPointsRequest {
+  int32 user_id = 1;
+}
+
+message GetPointsResponse {
+  float points = 1;
+}

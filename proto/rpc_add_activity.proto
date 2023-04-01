@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+enum ActivityActionType {
+  ActivityActionUnspecified = 0;
+  ActivityInvite = 1;
+  ActivityAddReview = 2;
+}
+
+message AddActivityRequest {
+  int32 user_id = 1;
+  ActivityActionType action_type =2;
+}
+
+message AddActivityResponse {
+  float points = 1;
+}

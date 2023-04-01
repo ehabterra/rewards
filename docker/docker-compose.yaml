@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    depends_on:
+      - mysql
+    container_name: api
+    environment:
+      PORT: 8000
+      DB_HOST: mysql
+      DB_PORT: 3306
+    ports:
+      - "8000:8000"
+    networks:
+      - apiNetwork
+
+  mysql:
+    image: "mysql:latest"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root_pass"
+      MYSQL_DATABASE: "rewards"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "pass"
+    ports:
+      - '3306:3306'
+      - '33060:33060'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    container_name: mysql
+    networks:
+      - apiNetwork
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  apiNetwork:
+    name: network

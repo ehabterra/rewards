@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "rpc_get_points.proto";
+import "rpc_add_activity.proto";
+import "rpc_send_points.proto";
+import "rpc_spend_points.proto";
+
+option go_package = "./pb";
+
+service RewardsService {
+  rpc GetPoints(GetPointsRequest) returns (GetPointsResponse) {}
+  rpc AddActivity(AddActivityRequest) returns (AddActivityResponse) {}
+  rpc SendPoints(SendPointsRequest) returns (SendPointsResponse) {}
+  rpc SpendPoints(SpendPointsRequest) returns (SpendPointsResponse) {}
+}

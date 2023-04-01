@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./pb";
+
+enum ActivityType {
+  ActivityTypeUnspecified = 0;
+  Invite = 1;
+  AddReview = 2;
+  PayService = 3;
+  PayOtherService = 4;
+  SharePoints = 5;
+}
+
+message Activity {
+  int32 id = 1;
+  int32 user_id = 2;
+  ActivityType type = 3;
+  float points = 4;
+  google.protobuf.Timestamp created_at = 5;
+}

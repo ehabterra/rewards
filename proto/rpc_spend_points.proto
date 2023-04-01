@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "activity.proto";
+
+option go_package = "./pb";
+
+enum SpendActionType {
+  SpendActionUnspecified = 0;
+  SpendPayService = 3;
+  SpendPayOtherService = 4;
+}
+
+message SpendPointsRequest {
+  int32 user_id = 1;
+  SpendActionType action_type = 2;
+  int32 object_id = 3;
+  float points_amount = 4;
+}
+
+message SpendPointsResponse {
+  Activity activity = 1;
+}
