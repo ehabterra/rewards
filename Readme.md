@@ -37,6 +37,8 @@ Stop and remove docker containers using this command:
 make down
 ```
 
+## Test using client application
+
 To run the test client with default parameters:
 ```shell
 make client
