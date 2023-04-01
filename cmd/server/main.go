@@ -40,19 +40,15 @@ func main() {
 	dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		cfg.DB.Username, cfg.DB.Password, cfg.DB.Host, cfg.DB.Port, cfg.DB.DB)
 
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	for tries := 0; tries < 5; tries++ {
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		if err == nil {
+			break
+		}
+		time.Sleep(time.Second)
+	}
 	if err != nil {
-		for tries := 0; tries < 5; tries++ {
-			time.Sleep(time.Second)
-
-			db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-			if err == nil {
-				break
-			}
-		}
-		if err != nil {
-			log.Fatalf("failed to connect database: %v", err)
-		}
+		log.Fatalf("failed to connect database: %v", err)
 	}
 
 	// Migrate the schema

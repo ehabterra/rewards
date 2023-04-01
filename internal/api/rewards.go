@@ -108,6 +108,11 @@ func (s *RewardsServer) SendPoints(ctx context.Context, request *pb.SendPointsRe
 		return nil, status.Errorf(codes.OutOfRange, "shared point should be greater than 0")
 	}
 
+	if userID == recipientID {
+		log.Printf("sender and recipient cannot be the same")
+		return nil, status.Errorf(codes.InvalidArgument, "sender and recipient cannot be the same")
+	}
+
 	err = s.DB.WithContext(ctx).Where(&user).Find(&user).Error
 	if err != nil {
 		// TODO: check if not exists send another error
