@@ -11,9 +11,9 @@ enum SpendActionType {
 }
 
 message SpendPointsRequest {
-  int32 user_id = 1;
+  uint32 user_id = 1;
   SpendActionType action_type = 2;
-  int32 object_id = 3;
+  uint32 object_id = 3;
   float points_amount = 4;
 }
 

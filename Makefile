@@ -1,6 +1,7 @@
 
 .PHONY : generate
 generate:
+	mkdir -p "internal/pb"
 	rm -rf internal/pb/*.go
 	protoc --proto_path=proto --go_out=internal/pb --go_opt=paths=source_relative \
         --go-grpc_out=internal/pb --go-grpc_opt=paths=source_relative \
@@ -29,4 +30,8 @@ debug:
 .PHONY: client
 client:
 	go run ./cmd/client
+
+.PHONY: migrate
+migrate:
+	go run ./cmd/migrate
 

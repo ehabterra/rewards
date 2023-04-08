@@ -7,10 +7,10 @@ import (
 )
 
 type Activity struct {
-	ID        int32           `json:"id"`
-	UserID    int32           `json:"user_id"`
+	ID        uint32          `json:"id"`
+	UserID    uint32          `json:"user_id"`
 	Type      pb.ActivityType `json:"type"`
-	ObjectID  int32           `json:"object_id"`
+	ObjectID  uint32          `json:"object_id"`
 	Points    float32         `json:"points"`
 	CreatedAt time.Time       `json:"created_at"`
 

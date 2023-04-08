@@ -9,7 +9,7 @@ enum ActivityActionType {
 }
 
 message AddActivityRequest {
-  int32 user_id = 1;
+  uint32 user_id = 1;
   ActivityActionType action_type =2;
 }
 

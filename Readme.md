@@ -16,7 +16,8 @@ invite friend and these points can be spent or shared with other users as well.
 - cmd: server and client main functions
 - docker: contains all docker files
 - internal:
-  - api: implement grpc server methods and include environment struct 
+  - api: implement grpc server methods
+  - types: include environment struct and action type
   - models: database models (user, activity)
   - pb: generated code from proto using the following command:
     ```shell
@@ -29,6 +30,12 @@ invite friend and these points can be spent or shared with other users as well.
 Build and run docker containers using this command:
 ```shell
 make up
+```
+
+## Migrate database
+To run database migration type this on terminal:
+```shell
+make migrate
 ```
 
 ## Stop the service

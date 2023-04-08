@@ -5,8 +5,8 @@ import (
 )
 
 type User struct {
-	ID        int32      `json:"id"`
-	Points    float32    `json:"points"`
+	ID        uint32     `json:"id"`
+	Points    float32    `gorm:"type:FLOAT UNSIGNED" json:"points"`
 	UpdatedAt *time.Time `json:"updated_at"`
 	CreatedAt time.Time  `json:"created_at"`
 
