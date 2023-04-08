@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/ehabterra/rewards/internal/models"
 	"github.com/ehabterra/rewards/internal/types"
 	"github.com/kelseyhightower/envconfig"
+	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -56,7 +56,7 @@ func main() {
 		Points: 0,
 	}).Error
 	if err != nil {
-		log.Println(err)
+		log.Error(err)
 	}
 
 	err = db.Clauses(clause.OnConflict{
@@ -66,6 +66,6 @@ func main() {
 		Points: 0,
 	}).Error
 	if err != nil {
-		log.Println(err)
+		log.Error(err)
 	}
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"time"
 
@@ -10,6 +9,7 @@ import (
 	"github.com/ehabterra/rewards/internal/pb"
 	"github.com/ehabterra/rewards/internal/types"
 	"github.com/kelseyhightower/envconfig"
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -34,7 +34,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	log.Println("server listening..")
+	log.Debug("server listening..")
 
 	dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		cfg.DB.Username, cfg.DB.Password, cfg.DB.Host, cfg.DB.Port, cfg.DB.DB)
